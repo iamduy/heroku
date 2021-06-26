@@ -5,7 +5,6 @@ import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import expressValidator from 'express-validator';
-import cookieParser from 'cookie-parser';
 const app = express();
 dotenv.config();
 
@@ -33,7 +32,7 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use(cors());
 app.use(expressValidator());
-app.use(cookieParser());
+
 //routes midleware
 app.use('/api', productRoutes);
 app.use('/api', categoryRoutes);
@@ -43,10 +42,8 @@ app.use('/api', blogRoutes);
 app.use('/api', orderRoutes);
 app.use('/api', order_detailRouter);
 
-
-
-
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
     console.log('server is running !', port);
 })
+
