@@ -18,7 +18,8 @@ const order_detailRouter = require('./routes/order_detail')
 //conection
 mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
-    usecreateIndex: true
+    useCreateIndex: true,
+    useUnifiedTopology: true
 }).then(() => {
     console.log('DB CONNECTED !')
 })
