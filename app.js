@@ -43,8 +43,8 @@ app.use('/api', blogRoutes);
 app.use('/api', orderRoutes);
 app.use('/api', order_detailRouter);
 
-const port = 8000;
-app.listen(port, () => {
-    console.log('server is running !', port);
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => {
+    console.log('server is running !', PORT);
 })
 
