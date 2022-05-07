@@ -15,11 +15,7 @@ const userSchema = new mongoose.Schema({
         required: true,
         maxLength: 32
     },
-    // password: {
-    //     type: String,
-    //     required: true
-    // },
-    avatar : {
+    avatar: {
         type: String
     },
     email: {
@@ -52,8 +48,6 @@ const userSchema = new mongoose.Schema({
 
 
 userSchema.virtual('password').set(function (password) {
-
-    // this._password = password; 
     this.salt = uuidv1();
     this.hashed_password = this.encrytPassword(password);
 })

@@ -16,7 +16,7 @@ export const signup = (req, res) => {
     })
 }
 
-export const signin = (req, res) => {
+export const login = (req, res) => {
     const { email, password } = req.body;
     User.findOne({ email }, (error, user) => {
         if (error || !user) {
@@ -47,7 +47,7 @@ export const signin = (req, res) => {
     })
 }
 
-export const signout = (req, res) => {
+export const logout = (req, res) => {
     res.clearCookie('t');
     res.json({
         message: 'Signout Success'

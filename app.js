@@ -15,7 +15,8 @@ const userRouter = require('./routes/user');
 const blogRoutes = require('./routes/blog');
 const orderRoutes = require('./routes/order')
 const order_detailRouter = require('./routes/order_detail')
-//conection
+
+
 mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useCreateIndex: true,
