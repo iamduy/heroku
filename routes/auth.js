@@ -1,12 +1,12 @@
-import express from 'express'
+import express from "express";
 
 const router = express.Router();
 
-import { signup, login, logout } from '../controller/auth'
-import { userSignupValidator } from '../validator/index'
+import { register, login, logout } from "../controller/auth";
+import { userSignupValidator } from "../validator/index";
 
-router.post('/register', userSignupValidator, signup)
-router.post('/login', login)
-router.get('/logout', logout)
+router.post("/register", userSignupValidator, register);
+router.post("/login", login);
+router.get("/logout", logout);
 
 module.exports = router;
