@@ -17,26 +17,22 @@ export const register = (req, res) => {
 
 export const login = (req, res) => {
   const { email, password } = req.body;
-  const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
 
   User.findOne({ email }, (error, user) => {
     const { _id, name, email, role, username, avatar } = user;
+    const token = jwt.sign({ id: _id, email, name, role, avatar, username }, process.env.JWT_SECRET);
+    res.cookie("t", token, { expire: new Date() + 9999 });
 
     if (error || !user || !user.authenticate(password)) {
       return res.status(400).json({
         error: "Function failure!",
       });
     }
-
-    res.cookie("t", token, { expire: new Date() + 9999 });
-    return res.json({
-      token,
-      user: { _id, email, name, role, username, avatar },
-    });
+    return res.json({ token });
   });
 };
 
-export const logout = (__, res) => {
+export const logout = (req, res) => {
   res.clearCookie("t");
   res.json({
     message: "Signout Success",

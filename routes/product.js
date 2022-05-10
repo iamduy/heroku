@@ -8,7 +8,7 @@ router.get('/products', list);
 
 router.post('/product/:user', requireSignin, isAuth, isAdmin, create);
 
-router.put('/product/:productId/:user', requireSignin, isAuth, isAdmin, update);
+router.patch('/product/:productId/:user', requireSignin, isAuth, isAdmin, update);
 
 router.get('/product/:productId', read);
 
