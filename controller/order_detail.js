@@ -1,5 +1,4 @@
 import OrderDetail from '../models/order_detail'
-import formidable from 'formidable'
 import _ from 'lodash'
 
 export const create = (req, res) => {
@@ -13,7 +12,7 @@ export const create = (req, res) => {
         res.json(data);
     })
 }
-export const list = (req, res) => {
+export const list = (__, res) => {
     OrderDetail.find((err, data) => {
         if (err) {
             res.status(400).json({

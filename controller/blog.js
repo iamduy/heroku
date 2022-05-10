@@ -1,6 +1,4 @@
 import Blog from '../models/blog'
-import formidable from 'formidable'
-import fs from 'fs'
 import _ from 'lodash'
 
 export const create = (req, res) => {
@@ -17,7 +15,7 @@ export const create = (req, res) => {
 
 }
 
-export const list = (req, res) => {
+export const list = (__, res) => {
     Blog.find((err, blog) => {
         if (err) {
             res.status(400).json({

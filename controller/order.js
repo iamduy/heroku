@@ -43,7 +43,7 @@ export const remove = (req, res) => {
     })
 }
 
-export const list = (req, res) => {
+export const list = (__, res) => {
     Order.find((err, data) => {
         if (err) {
             res.status(400).json({

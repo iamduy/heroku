@@ -27,10 +27,12 @@ export const create = (req, res) => {
     });
 }
 
-export const list = (req, res) => {
+export const list = (__, res) => {
     Category.find((err, data) => {
         if (err) {
-            error: "Không tìm thấy sản phẩm"
+            res.status(400).json({
+                error: "Product is not exist!"
+            })
         }
         res.json(data);
     })
@@ -41,7 +43,7 @@ export const categoryById = (req, res, next, id) => {
     Category.findById(id).exec((err, category) => {
         if (err || !category) {
             res.status(400).json({
-                error: "Không tìm thấy Danh mục"
+                error: "Not found category!"
             })
         }
         req.category = category;
@@ -49,42 +51,20 @@ export const categoryById = (req, res, next, id) => {
     })
 }
 
-// tim san pham tren request
+
 export const read = (req, res) => {
     return res.json(req.category);
 }
 
-// export const update = (req, res) => {
-
-//     let category = req.category;
-//     category.name = req.body.name;
-//     category.photo = req.body.photo;
-
-//     category.save((err, data) => {
-//         if (err || !data) {
-//             res.json({
-//                 error: "Sửa danh mục thất bại"
-//             })
-//         }
-//         console.log(data);
-//         res.json(data);
-//     });
-// }
-
-// xoa san pham
 export const remove = (req, res) => {
     let category = req.category;
     category.remove((err, deleteCate) => {
         if (err) {
             return res.status(400).json({
-                error: "Không xóa được sản phẩm"
+                error: "Delete Failure!"
             })
         }
-        res.json({
-            category: deleteCate,
-            message: "Xóa thành công"
-        })
-
+        res.json({ category: deleteCate, message: 'Delete success' })
     })
 }
 
@@ -103,7 +83,7 @@ export const update = (req, res) => {
     form.parse(req, (err, fields, files) => {
         if (err) {
             return res.status(400).json({
-                error: "Sửa danh mục thất bại"
+                error: "Update failure!"
             })
         }
 
@@ -116,7 +96,7 @@ export const update = (req, res) => {
         category.save((err, data) => {
             if (err) {
                 res.json({
-                    error: "Sửa danh mục thất bại"
+                    error: "Update failure!"
                 })
             }
             res.json(data);

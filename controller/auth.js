@@ -32,7 +32,7 @@ export const login = (req, res) => {
   });
 };
 
-export const logout = (req, res) => {
+export const logout = (__, res) => {
   res.clearCookie("t");
   res.json({
     message: "Signout Success",

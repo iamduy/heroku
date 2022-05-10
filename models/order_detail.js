@@ -22,7 +22,7 @@ const orderDetailSchema = new mongoose.Schema({
         ref: "Category",
         required: true
     },
-    sl : {
+    sl: {
         type: Number,
         trim: true,
         required: true,

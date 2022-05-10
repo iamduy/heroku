@@ -8,22 +8,24 @@ export const remove = (req, res) => {
     product.remove((err, deleteProd) => {
         if (err) {
             return res.status(400).json({
-                error: "Không xóa được sản phẩm"
+                error: "Delete failure!"
             })
         }
         res.json({
             product: deleteProd,
-            message: "Xóa thành công"
+            message: "Delete success"
         })
 
     })
 }
 
 
-export const list = (req, res) => {
+export const list = (__, res) => {
     Product.find((err, data) => {
         if (err) {
-            error: "Không tìm thấy sản phẩm"
+            return res.status(400).json({
+                error: "Can't found product"
+            })
         }
         res.json(data);
     })
@@ -35,7 +37,7 @@ export const productById = (req, res, next, id) => {
     Product.findById(id).exec((err, product) => {
         if (err || !product) {
             res.status(400).json({
-                error: "Không tìm thấy sản phẩm"
+                error: "Can't found product"
             })
         }
         req.product = product;
@@ -55,7 +57,7 @@ export const create = (req, res) => {
     form.parse(req, (err, fields, files) => {
         if (err) {
             return res.status(400).json({
-                error: "Thêm sản phẩm thất bại"
+                error: ""
             })
         }
         const { name, description, price, feature, quantity, category } = fields;
@@ -116,7 +118,7 @@ export const update = (req, res) => {
         let product = req.product;
 
         product = _.assignIn(product, fields);
-        
+
         if (Object.keys(files).length != 0) {
             product.photo.data = fs.readFileSync(files.photo.path);
             product.photo.contentType = files.photo.type;
